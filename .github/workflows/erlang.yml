@@ -1,0 +1,29 @@
+name: Erlang CI
+
+on:
+  push:
+    branches: [main, develop]
+    tags: ["*"]
+  pull_request:
+    branches: ["*"]
+
+jobs:
+
+  test:
+    name: OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        otp: ['23.1']
+        elixir: ['1.10.4']
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-elixir@v1
+      with:
+        otp-version: ${{matrix.otp}}
+        elixir-version: ${{matrix.elixir}}
+    - name: Compile
+      run: rebar3 as test compile
+    - name: Run tests
+      run: rebar3 as test ct --sys_config ./test/sys.config --spec ./test/specs/all.spec --sname tests --readable true --basic_html false
