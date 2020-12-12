@@ -1,0 +1,1 @@
+{cover,  "./lib.coverspec"}.
