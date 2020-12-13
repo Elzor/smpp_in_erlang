@@ -1,5 +1,5 @@
 # smpp_in_erlang
-Simple project needs to illustrate working with SMPP in Erlang
+Simple project illustrates working with SMPP in Erlang
 
 This project includes server and client to show genral workflow for SMPP:
 
