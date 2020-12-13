@@ -6,7 +6,7 @@
     {vsn, "0.1.0"},
     {registered, []},
     {mod, {smpp_example_app, []}},
-    {applications, [kernel, stdlib]},
+    {applications, [kernel, stdlib, smppex, telemetry]},
     {env, []},
     {modules, []},
     {licenses, ["Apache 2.0"]},

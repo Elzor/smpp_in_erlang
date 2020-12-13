@@ -7,11 +7,14 @@
 -include_lib("eunit/include/eunit.hrl").
 
 init(_, _) ->
+  application:set_env(sasl, sasl_error_logger, false),
   application:start(logger),
   init_logger(),
   error_logger:add_report_handler(ct_helper_error_h),
   logger:add_handler(default, logger_std_h, #{config => #{type => standard_io}, level => all}),
   global:register_name(global_io_srv, group_leader()),
+  application:ensure_all_started(telemetry),
+  application:ensure_all_started(smppex),
   {ok, undefined}.
 
 
@@ -55,6 +58,7 @@ after_action(_Suite, Return) -> Return.
 
 
 init_logger() ->
+  _ = logger:remove_handler('Elixir.Logger'),
   _ = logger:remove_handler(smpp_example_log),
   Template = [time, " [", level, "] ", pid, " ", mfa, ":", line, " :: ", msg, "\n"],
   HandlerConfig =
