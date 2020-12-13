@@ -303,4 +303,4 @@ deliver_sm_resp(MessageId) ->
   ?pdu:new({CommandId, CommandStatus, SeqNumber}, #{message_id => MessageId}, #{}).
 
 
-send_msg_minimal_timeout() -> application:get_env(eota_streams, send_msg_minimal_timeout_sec, 300).
+send_msg_minimal_timeout() -> application:get_env(smpp_example, send_msg_minimal_timeout_sec, 300).

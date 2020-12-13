@@ -113,7 +113,6 @@ do_handle_submit_sm(Pdu, #{bound := true, last_msg_id := LastMsgId} = State) ->
   {ok, [Resp1, Resp2], State#{last_msg_id => LastMsgId + 1}};
 
 do_handle_submit_sm(Pdu, State) ->
-  ?debugVal(here),
   Code = ?errors:code_by_name('RINVBNDSTS'),
   Resp = ?pdu:as_reply_to(?factory:submit_sm_resp(Code), Pdu),
   {ok, [Resp], State}.
